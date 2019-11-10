@@ -8,7 +8,11 @@ $b = 0;
 $sin_x = 0;
 $exp_x = 0;
 $result = 0;
-$int_func = 'c';
+$power = '';
+$base = '';
+$operator = '';
+$int_func = '';
+$exp_x_ = '';
 
 if (isset($_POST["doit"])) 
 {
@@ -27,9 +31,9 @@ if (isset($_POST["doit"]))
 	 if ($x != 0) {$x_ = strval($x).'/2 x² + ';} else {$x_ = '';}
 	 if ($x2 != 0) {$x2_ = strval($x2).'/3 x³ + ';} else {$x2_ = '';}
 	 if ($x3 != 0) {$x3_ = strval($x3).'/4 x⁴ + ';} else {$x3_ = '';}
-	 if ($exp_x != 0) {$exp_x_ = strval($exp_x).'exp(x) + ';} else {$exp_x_ = '';}
+	 if ($exp_x != 0) {$exp_x_ = strval($exp_x); $power = 'x'; $base = 'e'; $operator = '+';}
 	 if ($sin_x != 0) {$sin_x_ = strval($sin_x).'sin(x) + ';} else {$sin_x_ = '';}
-	 $int_func = $c_ . $x_ . $x2_ . $x3_ . $exp_x_ . $sin_x_ . 'c';
+	 $int_func = $c_ . $x_ . $x2_ . $x3_ . $sin_x_ ;
 	}
 ?>
 <!doctype html>
@@ -38,7 +42,6 @@ if (isset($_POST["doit"]))
 <meta charset="utf8">
 <title>Definite Integral Calculation</title>
 </head>
-
 <body>
 <h2>Definite Integral Calculation:</h2>
 <form method='post'>
@@ -62,11 +65,13 @@ if (isset($_POST["doit"]))
 	<button type='submit' name="doit" >Submit</button> <br> <br>
 
 	<span class="answers" style="position: relative;">
-		<span class='textare'> &int; <small>a<sup>b</sup></small> </span>
+		<span class='textare'> &int;<small>a<sup>b</sup></small> </span>
 
+		<span>f(x)dx =<?=$int_func?><span><?=$exp_x_?><small><?=$base?><sup><?=$power?></sup></small><?=$operator?></span></span>
+		<span>c</span>
+		<br><br>
 
-		<span>f(x)dx = <?=$int_func?></span> <br> <br>
-		<span class='textare'>&int; <small><?=$a?><sup><?=$b?></sup></small> </span>
+		<span class='textare'>&int;<small><?=$a?><sup><?=$b?></sup></small> </span>
 
 		<span>f(x)dx = <?=$result?></span>
 	</span>
