@@ -28,9 +28,9 @@ if (isset($_POST["doit"]))
 	 $max = $c*$b + ($x/2)*$b**2 + ($x2/3)*$b**3 + ($x3/4)*$b**4 + $exp_x*exp($b) - cos($b)*$sin_x;
 	 $result = $max - $min; 
 	 if ($c != 0) {$c_ = strval($c) . 'x + ';} else {$c_ = '';}
-	 if ($x != 0) {$x_ = strval($x).'/2 x² + ';} else {$x_ = '';}
-	 if ($x2 != 0) {$x2_ = strval($x2).'/3 x³ + ';} else {$x2_ = '';}
-	 if ($x3 != 0) {$x3_ = strval($x3).'/4 x⁴ + ';} else {$x3_ = '';}
+	 if ($x != 0) {$x_ = strval($x/2).' x² + ';} else {$x_ = '';}
+	 if ($x2 != 0) {$x2_ = strval($x2/3).' x³ + ';} else {$x2_ = '';}
+	 if ($x3 != 0) {$x3_ = strval($x3/4).' x⁴ + ';} else {$x3_ = '';}
 	 if ($exp_x != 0) {$exp_x_ = strval($exp_x); $power = 'x'; $base = 'e'; $operator = '+';}
 	 if ($sin_x != 0) {$sin_x_ = strval($sin_x).'sin(x) + ';} else {$sin_x_ = '';}
 	 $int_func = $c_ . $x_ . $x2_ . $x3_ . $sin_x_ ;
