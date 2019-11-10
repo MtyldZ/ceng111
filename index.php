@@ -10,13 +10,12 @@ $exp_x = 0;
 $result = 0;#answer
 $power = '';
 $base = '';
-$operator = '';#after exp(x)
 $int_func = '';#integraled function except exp(x)
 $exp_x_ = '';
 $x_ = '';#string, for the int_func
 $x2_ = '';#string, for the int_func
 $x3_ = '';#string, for the int_func
-
+$p_c = '';
 if (isset($_POST["doit"])){
 	 $c = $_POST['c'];
 	 $x = $_POST['x'];
@@ -29,19 +28,19 @@ if (isset($_POST["doit"])){
 	 $min = $c*$a + ($x/2)*$a**2 + ($x2/3)*$a**3 + ($x3/4)*$a**4 + $exp_x*exp($a) - cos($a)*$sin_x;
 	 $max = $c*$b + ($x/2)*$b**2 + ($x2/3)*$b**3 + ($x3/4)*$b**4 + $exp_x*exp($b) - cos($b)*$sin_x;
 	 $result = $max - $min; 
-	 if ($c != 0) {$c_ = strval($c) . 'x + ';} else {$c_ = '';}
+	 if ($c != 0) {$c_ = strval($c) . 'x';} else {$c_ = '';}
 	 if ($x != 0) {
-		 if ($x%2==0){$x_ = strval($x/2).' x² + ';} if ($x%2!=0){$x_ = strval($x).'/2 x² + ';}}
+		 if ($x%2==0){$x_ = ($x > 0 ? '+':'-').strval(abs($x/2)).'x²';} if ($x%2!=0){$x_ = ($x > 0 ? '+':'-').strval(abs($x/2)).'/2 x²';}}
 	 if ($x2 != 0){
-		 if ($x2%3==0){$x2_ = strval($x/3).' x² + ';} if ($x%3!=0){$x2_ = strval($x2).'/3 x³ + ';}}
+		 if ($x2%3==0){$x2_ =($x2 > 0 ? '+':'-').strval(abs($x2/3)).' x²';} if ($x%3!=0){$x2_ = ($x2 > 0 ? '+':'-').strval(abs($x2)).'/3 x³';}}
 	 if ($x3 != 0){
-		 if ($x2%4==0){$x3_ = strval($x/4).' x² + ';} if ($x%4!=0){$x3_ = strval($x3).'/4 x⁴ + ';}}
-
+		 if ($x2%4==0){$x3_ = ($x3 > 0 ? '+':'-').strval(abs($x/4)).' x²';} if ($x%4!=0){$x3_ = ($x3 > 0 ? '+':'-').strval(abs($x3)).'/4 x⁴';}}
 	 if ($exp_x != 0) {
-		 $exp_x_ = strval($exp_x); $power = 'x'; $base = 'e'; $operator = '+';}
+		 $exp_x_ = ($exp_x > 0 ? '+':'-').strval(abs($exp_x)); $power = 'x'; $base = 'e';}
 	 if ($sin_x != 0) {
-		 $sin_x_ = strval($sin_x).'sin(x) + ';} else {$sin_x_ = '';}
+		 $sin_x_ = ($sin_x > 0 ? '+':'-').strval(abs($sin_x)).'sin(x)';} else {$sin_x_ = '';}
 	 $int_func = $c_ . $x_ . $x2_ . $x3_ . $sin_x_ ;
+	 if ($x or $x2 or $x3 or $sin_x or $exp_x){$p_c = '+';}
 	}
 ?>
 
@@ -78,8 +77,7 @@ if (isset($_POST["doit"])){
 
 		<span>&int; <small>a<sup>b</sup></small> </span>
 
-		<span>f(x)dx =<?=$int_func?><span><?=$exp_x_?><small><?=$base?><sup><?=$power?></sup></small><?=$operator?></span></span>
-		<span>c</span>
+		<span>f(x)dx = <?=$int_func?><span><?=$exp_x_?><small><?=$base?><sup><?=$power?></sup></small><?=$p_c?>c</span></span>
 		<br><br>
 		<span>&int; <small><?=$a?><sup><?=$b?></sup></small> </span>
 		<span>f(x)dx = <?=$result?></span>
